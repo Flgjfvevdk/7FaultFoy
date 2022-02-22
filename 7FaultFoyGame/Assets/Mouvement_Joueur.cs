@@ -8,7 +8,7 @@ public class Mouvement_Joueur : MonoBehaviour
 
     float horizontal;
     float vertical;
-    float moveLimiter = 0.5f;
+    float moveLimiter = Mathf.Sqrt(2)/2.0f;
 
     public float runSpeed;
 
@@ -30,6 +30,7 @@ public class Mouvement_Joueur : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
         if (Input.GetKeyDown(KeyCode.Space) & !IsLifting)
         {
             col = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 1.0f);
@@ -47,7 +48,7 @@ public class Mouvement_Joueur : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) & IsLifting) {
 
                 tr = ObjectLifted.GetComponent<Transform>();
-                tr.localPosition = transform.position + new Vector3 (1, -0.2f, 0);
+                tr.localPosition = new Vector3 (1, -0.2f, 0);
                 tr.parent = null; 
                 IsLifting = false;
             
@@ -62,5 +63,30 @@ public class Mouvement_Joueur : MonoBehaviour
             vertical *= moveLimiter;
         } 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+
+
+        //On modifie le sprite du joueur selon sa direction
+        Animator anim = GetComponent<Animator>();
+        if (horizontal > 0)
+        {
+            anim.SetBool("GoRight", true);
+            anim.SetBool("GoLeft", false);
+        } else if(horizontal < 0)
+        {
+            anim.SetBool("GoRight", false);
+            anim.SetBool("GoLeft", true);
+        } else
+        {
+            anim.SetBool("GoRight", false);
+            anim.SetBool("GoLeft", false);
+        }
+
+        if(vertical > 0)
+        {
+            anim.SetBool("GoBack", true);
+        } else
+        {
+            anim.SetBool("GoBack", false);
+        }
     }
 }

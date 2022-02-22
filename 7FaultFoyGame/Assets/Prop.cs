@@ -10,11 +10,11 @@ public class Prop : MonoBehaviour
     private Popup scr;
     private Transform tr;
     public float distance;
+    
 
     public bool playerClose() {
         if (Mathf.Sqrt((tr.position.x-transform.position.x)*(tr.position.x-transform.position.x) + (tr.position.y-transform.position.y)*(tr.position.y-transform.position.y) ) < distance ) {
             return true;
-            Debug.Log("YES");
         }
         return false;
     }
@@ -37,7 +37,7 @@ public class Prop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerClose()) {
+        if (playerClose() && player.GetComponent<Mouvement_Joueur>().IsLifting == false) {
             showPopup();
         } else {
             hidePopup();

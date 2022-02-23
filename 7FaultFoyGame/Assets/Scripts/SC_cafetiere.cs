@@ -36,17 +36,22 @@ public class SC_cafetiere : MonoBehaviour
         // Faire un café (la machine )
         if (!isMachineReady && tassePresent())
         {
-            timeOnMachine += Time.deltaTime;
-            if (timeOnMachine < timeToMakeCoffee)
+            // Il ne faut pas qu'il y ai de sirop pour faire un café
+            if (!scTasse.isSirop)
             {
-                scTasse.fillingRate = timeOnMachine / timeToMakeCoffee;
-                tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
-            }
-            else
-            {
-                isCoffeeReady = true;
-                scTasse.fillingRate = 1f;
-                tasse.GetComponent<SpriteRenderer>().color = Color.green;
+                timeOnMachine += Time.deltaTime;
+                scTasse.isCafe = true;
+                if (timeOnMachine < timeToMakeCoffee)
+                {
+                    scTasse.fillingRate = timeOnMachine / timeToMakeCoffee;
+                    tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
+                }
+                else
+                {
+                    isCoffeeReady = true;
+                    scTasse.fillingRate = 1f;
+                    tasse.GetComponent<SpriteRenderer>().color = Color.green;
+                }
             }
         }
         else

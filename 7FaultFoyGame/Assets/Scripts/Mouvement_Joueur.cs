@@ -36,7 +36,7 @@ public class Mouvement_Joueur : MonoBehaviour
             col = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 1.0f);
             foreach (Collider2D elem in col)
             {
-                if (elem.gameObject.CompareTag("attrapable"))
+                if (elem.gameObject.CompareTag("attrapable") && !IsLifting)
                 {
                     ObjectLifted = elem.gameObject;
                     //Debug.Log(elem.name);
@@ -59,6 +59,16 @@ public class Mouvement_Joueur : MonoBehaviour
                     if (scCafetiere.isMachineReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
                     {
                         scCafetiere.makeCoffee(ObjectLifted);
+                        tr.parent = null;
+                        IsLifting = false;
+                    }
+                }
+                else if (elem.gameObject.CompareTag("distributeurSirop"))
+                {
+                    SC_DistributeurSirop scDistriSirop = elem.GetComponent<SC_DistributeurSirop>();
+                    if (scDistriSirop.isDistributeurReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
+                    {
+                        scDistriSirop.makeSirop(ObjectLifted);
                         tr.parent = null;
                         IsLifting = false;
                     }

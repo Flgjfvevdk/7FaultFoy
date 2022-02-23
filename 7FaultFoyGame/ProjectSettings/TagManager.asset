@@ -7,6 +7,7 @@ TagManager:
   - attrapable
   - cafetiere
   - tasse
+  - distributeurSirop
   layers:
   - Default
   - TransparentFX

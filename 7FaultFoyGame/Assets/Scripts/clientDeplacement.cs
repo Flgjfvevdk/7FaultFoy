@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class client : MonoBehaviour
+public class clientDeplacement : MonoBehaviour
 {
 
     public Stack<Vector2> positions = new Stack<Vector2>();

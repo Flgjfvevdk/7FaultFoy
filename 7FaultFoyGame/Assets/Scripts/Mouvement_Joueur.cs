@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Mouvement_Joueur : MonoBehaviour
 {
-   Rigidbody2D body;
+    Rigidbody2D body;
 
     float horizontal;
     float vertical;
-    float moveLimiter = Mathf.Sqrt(2)/2.0f;
+    float moveLimiter = Mathf.Sqrt(2) / 2.0f;
 
     public float runSpeed;
 
     private Collider2D[] col;
-    private Transform tr; 
+    private Transform tr;
     public bool IsLifting;
     private GameObject ObjectLifted;
-    private char direction; 
+    private char direction;
 
-    void Start ()
+    void Start()
     {
         body = GetComponent<Rigidbody2D>();
         body.gravityScale = 0f;
@@ -34,24 +34,47 @@ public class Mouvement_Joueur : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) & !IsLifting)
         {
             col = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 1.0f);
-            foreach (Collider2D elem in col) {
-                if (elem.gameObject.CompareTag("attrapable")) {
+            foreach (Collider2D elem in col)
+            {
+                if (elem.gameObject.CompareTag("attrapable"))
+                {
                     ObjectLifted = elem.gameObject;
                     //Debug.Log(elem.name);
                     tr = elem.gameObject.GetComponent<Transform>();
-                    tr.SetPositionAndRotation(transform.position + new Vector3 (0,1,0), Quaternion.identity);
-                    tr.SetParent(transform,true);
+                    tr.SetPositionAndRotation(transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    tr.SetParent(transform, true);
                     IsLifting = true;
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space) & IsLifting) {
+        else if (Input.GetKeyDown(KeyCode.Space) & IsLifting)
+        {
+            //On regarde si il y a une machine proche qui peut intéragir avec l'objet porté
+            col = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 1.0f);
+            foreach (Collider2D elem in col)
+            {
+                if (elem.gameObject.CompareTag("cafetiere"))
+                {
+                    SC_cafetiere scCafetiere = elem.GetComponent<SC_cafetiere>();
+                    if (scCafetiere.isMachineReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
+                    {
+                        scCafetiere.makeCoffee(ObjectLifted);
+                        tr.parent = null;
+                        IsLifting = false;
+                    }
+                }
+            }
 
+            //On n'a pas trouver de cafetiere
+            if (IsLifting)
+            {
                 tr = ObjectLifted.GetComponent<Transform>();
-                tr.localPosition = new Vector3 (1, -0.2f, 0);
-                tr.parent = null; 
+                tr.localPosition = new Vector3(1, -0.2f, 0);
+                tr.parent = null;
                 IsLifting = false;
-            
+            }
+
+
         }
     }
 
@@ -61,7 +84,7 @@ public class Mouvement_Joueur : MonoBehaviour
         {
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
-        } 
+        }
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
 
 
@@ -71,20 +94,23 @@ public class Mouvement_Joueur : MonoBehaviour
         {
             anim.SetBool("GoRight", true);
             anim.SetBool("GoLeft", false);
-        } else if(horizontal < 0)
+        }
+        else if (horizontal < 0)
         {
             anim.SetBool("GoRight", false);
             anim.SetBool("GoLeft", true);
-        } else
+        }
+        else
         {
             anim.SetBool("GoRight", false);
             anim.SetBool("GoLeft", false);
         }
 
-        if(vertical > 0)
+        if (vertical > 0)
         {
             anim.SetBool("GoBack", true);
-        } else
+        }
+        else
         {
             anim.SetBool("GoBack", false);
         }

@@ -1,0 +1,23 @@
+Machines:
+	Cafetière:
+		-Verre/Tasse
+		-Remplire le niveau d'eau de temps en temps
+		-Remplire le stock de café
+
+	Sirop:
+		-Verre/Tasse
+		-Mettre le bon sirop
+		-mettre de l'eau
+
+	Four:
+		-mettre les chocolatines/croissants (ils sont prêt au bout d'un moment)
+
+	?Lavabo:?
+		-netoyer le tasse 
+
+	?Barre Chocolatée:? 
+		-plusieurs type de barres dispo et il faut donner la bonne
+
+
+
+Player:

@@ -1,5 +1,5 @@
 Machines:
-	Cafetière:
+	Cafetière:(en cours Paul)
 		-Verre/Tasse
 		-Remplire le niveau d'eau de temps en temps
 		-Remplire le stock de café
@@ -20,4 +20,10 @@ Machines:
 
 
 
-Player:
+Clients:
+	- Créer un script "clientDemande" qui formule au hasard une demande ("je voudrais café",...) .
+	- dans un autre script "clientDeplacement" : il a une liste public de positiol qu'il doit parcourir et tant que la liste nest pas vide il se dirige vers la première position de la liste (et supprime la position de la liste une fois atteinte). Ça permettra de faire faire des chemins au pnj
+
+
+Autre:
+	-Menu

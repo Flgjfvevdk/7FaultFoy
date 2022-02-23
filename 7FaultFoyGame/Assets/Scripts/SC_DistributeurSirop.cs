@@ -52,6 +52,7 @@ public class SC_DistributeurSirop : MonoBehaviour
         else
         {
             isDistributeurReady = true;
+            isSiropReady = false;
         }
     }
 

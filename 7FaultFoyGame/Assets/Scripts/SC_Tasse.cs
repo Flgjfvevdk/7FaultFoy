@@ -13,9 +13,6 @@ public class SC_Tasse : MonoBehaviour
     public bool isSirop;
     
 
-    // Autre
-    public bool onCafetiere;
-
     // Aide Test
     public bool clearTasse;
 
@@ -24,8 +21,6 @@ public class SC_Tasse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        onCafetiere = false;
-
         clearTasse = false;
     }
 

@@ -57,6 +57,7 @@ public class SC_cafetiere : MonoBehaviour
         else
         {
             isMachineReady = true;
+            isCoffeeReady = false;
         }
     }
 

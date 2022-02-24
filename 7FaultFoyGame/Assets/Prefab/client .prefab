@@ -185,7 +185,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9a0454ac2bb56354ba4293a3f72a5606, type: 3}
   - {fileID: 21300000, guid: a2ce9240e16541341a6c7b7b106b4624, type: 3}
   - {fileID: 21300000, guid: 0fe7eb414f8c7894388d7bc2cc5c4117, type: 3}
-  distanceJoueur: 3
+  distanceJoueur: 2
   bulle: {fileID: 400432846640527705, guid: 6d4a802b8c7217844a03801f8102baf0, type: 3}
 --- !u!114 &453312510130404737
 MonoBehaviour:

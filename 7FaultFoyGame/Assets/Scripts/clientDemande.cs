@@ -25,6 +25,8 @@ public class clientDemande : MonoBehaviour
     private Transform tr;
     private Collider2D[] cols;
 
+    public string maDemande;
+
 
     
     void Start()
@@ -43,18 +45,22 @@ public class clientDemande : MonoBehaviour
         switch (demandeIndex) {
         case 0:
             //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " " + typeCafe[Random.Range(0,typeCafe.Length)] + demandes[demandeIndex] + "SVP.";
+            maDemande = demandes[0];
             sprRend.sprite = commandes[0];
             break;
         case 1:
             //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " "  + demandes[demandeIndex] + typeSirop[Random.Range(0,typeSirop.Length)] + "SVP.";
+            maDemande = demandes[1];
             sprRend.sprite = commandes[1];
             break;
         case 2:
             //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " "  + demandes[demandeIndex] ;
+            maDemande = demandes[2];
             sprRend.sprite = commandes[2];
             break;
         case 3:
             //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " "  +  typeBC[Random.Range(0,typeBC.Length)] + "SVP.";
+            maDemande = demandes[3];
             sprRend.sprite = commandes[3];
             break;
         }

@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Prop : MonoBehaviour 
 {
-    public GameObject player;
+    public GameObject client;
     public GameObject popup;
     private Popup scr;
     private Transform tr;
     public float distance;
     
 
-    public bool playerClose() {
+    public bool clientClose() {
         if (Mathf.Sqrt((tr.position.x-transform.position.x)*(tr.position.x-transform.position.x) + (tr.position.y-transform.position.y)*(tr.position.y-transform.position.y) ) < distance ) {
             return true;
         }
@@ -30,14 +30,14 @@ public class Prop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tr = player.GetComponent<Transform>();
+        tr = client.GetComponent<Transform>();
         scr = popup.GetComponent<Popup>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerClose() && player.GetComponent<Mouvement_Joueur>().IsLifting == false) {
+        if (clientClose()) {
             showPopup();
         } else {
             hidePopup();

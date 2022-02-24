@@ -8,6 +8,7 @@ TagManager:
   - cafetiere
   - tasse
   - distributeurSirop
+  - client
   layers:
   - Default
   - TransparentFX

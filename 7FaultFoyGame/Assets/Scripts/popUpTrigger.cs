@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Prop : MonoBehaviour 
+public class popUpTrigger : MonoBehaviour 
 {
-    public GameObject client;
+    public GameObject player;
     public GameObject popup;
     private Popup scr;
     private Transform tr;
     public float distance;
     
 
-    public bool clientClose() {
+    public bool playerClose() {
         if (Mathf.Sqrt((tr.position.x-transform.position.x)*(tr.position.x-transform.position.x) + (tr.position.y-transform.position.y)*(tr.position.y-transform.position.y) ) < distance ) {
             return true;
         }
@@ -30,14 +30,14 @@ public class Prop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tr = client.GetComponent<Transform>();
+        tr = player.GetComponent<Transform>();
         scr = popup.GetComponent<Popup>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (clientClose()) {
+        if (playerClose()) {
             showPopup();
         } else {
             hidePopup();

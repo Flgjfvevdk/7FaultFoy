@@ -9,6 +9,9 @@ TagManager:
   - tasse
   - distributeurSirop
   - client
+  - player
+  - Commande
+  - bulle
   layers:
   - Default
   - TransparentFX

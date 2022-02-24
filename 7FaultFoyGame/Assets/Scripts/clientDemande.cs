@@ -17,11 +17,21 @@ public class clientDemande : MonoBehaviour
 
     private SpriteRenderer sprRend;
     public Sprite[] commandes;
+    bool isTalking; 
+    bool InRange;
+    public int distanceJoueur = 3;
+    public GameObject bulle;
+    private GameObject bulleCree;
+    private Transform tr;
+    private Collider2D[] cols;
 
 
     
     void Start()
     {
+        isTalking = false;
+        InRange = false;
+        tr = GetComponent<Transform>();
         // il a un seul fils 
         foreach (Transform child in transform) {
             if (child.gameObject.CompareTag("Commande")) {
@@ -29,7 +39,7 @@ public class clientDemande : MonoBehaviour
             }
         }
 
-        demandeIndex = Random.Range(0,demandes.Length-1);
+        demandeIndex = Random.Range(0,demandes.Length);
         switch (demandeIndex) {
         case 0:
             //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " " + typeCafe[Random.Range(0,typeCafe.Length)] + demandes[demandeIndex] + "SVP.";
@@ -53,6 +63,29 @@ public class clientDemande : MonoBehaviour
 
     void Update()
     {
+        InRange = false;
+        // bulle apparait lorsque le client est suffisement proche du joueur 
+        cols = Physics2D.OverlapCircleAll(tr.position, distanceJoueur);
+        foreach (Collider2D elem in cols) {
+            if (elem.gameObject.CompareTag("Player")) {
+                InRange = true;
+            }
+        }
+
+        if (InRange & !isTalking) {
+
+            bulleCree = Instantiate(bulle, tr.position + new Vector3 (0,2,0),Quaternion.identity);
+            bulleCree.GetComponent<Transform>().parent = tr;
+            isTalking = true;
+            
+        }
+        else if (!InRange & isTalking) {
+            //Debug.Log("bulle destroyed client est loin");
+            isTalking = false;
+            if (bulleCree != null) {
+                Destroy(bulleCree);
+            }
+        }
         
     }
 }

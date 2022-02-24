@@ -199,7 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb9c4772cde15145b07c26dd4c06cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   popup: {fileID: 5329086423903165321}
   distance: 2
 --- !u!1 &5329086423903165321

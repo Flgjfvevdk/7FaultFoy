@@ -8,7 +8,7 @@ public class clientDemande : MonoBehaviour
     public static string[] demandes = new string[] {"Café", "Sirop", "Croissant", "Barre de chocolat"}; // a modifier apres 
     //public static string[] typeCafe = new string[] {"verre", "tasse "};
     //public static string[] typeBC = new string[] {"Snks", "Pluto", "Jueno", "katkit "};
-    public static string[] typeSirop = new string[] {"Rouge", "Jaune", "Vert", "Noir", "Bleu", "Mauve "};
+    public static string[] typeSirop = new string[] {"Rouge", "Jaune", "Vert", "Noir", "Bleu", "Mauve "}; // a discuter 
     // public static String[] quantite = new String[] {"1", "2"};
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class popUpTrigger : MonoBehaviour 
 {
-    public GameObject player;
+    private GameObject player;
     public GameObject popup;
     private Popup scr;
     private Transform tr;
@@ -30,6 +30,7 @@ public class popUpTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player");  
         tr = player.GetComponent<Transform>();
         scr = popup.GetComponent<Popup>();
     }

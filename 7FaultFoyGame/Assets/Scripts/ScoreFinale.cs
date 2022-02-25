@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreFinale : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class ScoreFinale : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        go = GameObject.FindTag("Score");
-        go.text = "Points : " + sc.score.ToString();
+        go = GameObject.FindWithTag("Score");
+        sc = go.GetComponent<Score>();
+        GetComponent<Text>().text = "Points : " + sc.score.ToString();
     }
-
 }

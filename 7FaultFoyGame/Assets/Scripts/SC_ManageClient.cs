@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SC_ManageClient : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class SC_ManageClient : MonoBehaviour
     {
         if(tempsRestant < 0)
         {
-            //Debug.Log("Arretez tout !");
+            SceneManager.LoadScene("Scene_Fin");
         } else
         {
             tempsRestant -= Time.deltaTime;

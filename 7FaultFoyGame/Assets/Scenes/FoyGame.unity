@@ -1450,7 +1450,7 @@ GameObject:
   - component: {fileID: 1744480640}
   m_Layer: 0
   m_Name: 'Score '
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0a40100e4f2db4dbfe4b79ed2c01cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 141773360}
+  go: {fileID: 877802206}
   score: 0
 --- !u!4 &1744480641
 Transform:

@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
     void Start()
     {
         Object.DontDestroyOnLoad(this);
-        scr = GetComponent<SC_Points>();
+        scr = go.GetComponent<SC_Points>();
     }
 
     // Update is called once per frame

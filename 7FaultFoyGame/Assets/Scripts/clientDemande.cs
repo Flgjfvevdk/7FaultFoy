@@ -37,6 +37,9 @@ public class clientDemande : MonoBehaviour
 
     private bool clientParti;
     
+    public GameObject pasContent;
+    [System.NonSerialized] public Vector2 enregistrement;
+    
     void Start()
     {
         tempsAttente = tempsMaxAttente;
@@ -52,23 +55,9 @@ public class clientDemande : MonoBehaviour
         }
 
         demandeIndex = Random.Range(0,demandes.Length);
-        switch (demandeIndex) {
-        case 0:
-            //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " " + typeCafe[Random.Range(0,typeCafe.Length)] + demandes[demandeIndex] + "SVP.";
-            maDemande = demandes[0];
-            sprRend.sprite = commandes[0];
-            break;
-        case 1:
-            //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " "  + demandes[demandeIndex] + typeSirop[Random.Range(0,typeSirop.Length)] + "SVP.";
-            maDemande = demandes[1];
-            sprRend.sprite = commandes[1];
-            break;
-        case 2:
-            //maDemande = "je voudrais " + quantite[Random.Range(0,quantite.Length)] + " "  + demandes[demandeIndex] ;
-            maDemande = demandes[2];
-            sprRend.sprite = commandes[2];
-            break;
-        }
+        maDemande = demandes[demandeIndex];
+        sprRend.sprite = commandes[demandeIndex];
+
 
     }
 
@@ -90,17 +79,15 @@ public class clientDemande : MonoBehaviour
             isTalking = true;
             //GetComponent<popUpTrigger>().showPopup();
             bulleCree.GetComponent<SC_Bulle>().popup = GetComponent<popUpTrigger>();
-
-
         }
-        else if (!InRange & isTalking) {
-            //Debug.Log("bulle destroyed client est loin");
-            isTalking = false;
-            if (bulleCree != null) {
-                GetComponent<popUpTrigger>().hidePopup();
-                Destroy(bulleCree);
-            }
-        }
+        // else if (!InRange & isTalking) {
+        //     //Debug.Log("bulle destroyed client est loin");
+        //     isTalking = false;
+        //     if (bulleCree != null) {
+        //         GetComponent<popUpTrigger>().hidePopup();
+        //         Destroy(bulleCree);
+        //     }
+        // }
 
         if(tempsAttente <= 0)
         {
@@ -118,10 +105,14 @@ public class clientDemande : MonoBehaviour
     public void demandeSatisfaite()
     {
         clientParti = true;
-        Debug.Log("yay ! J'ai reçu mon " + maDemande);
         if(mngClient != null)
         {
-            mngClient.ajouter(transform.position);
+            mngClient.ajouter(enregistrement);
+        }
+
+        if (bulleCree != null) {
+            GetComponent<popUpTrigger>().hidePopup();
+            Destroy(bulleCree);
         }
 
         pointsScript.addPoint(100.0f * tempsAttente/tempsMaxAttente);
@@ -131,12 +122,19 @@ public class clientDemande : MonoBehaviour
 
     private void demandeRate()
     {
-        Debug.Log("trop nul !");
+        clientParti = true;
         if (mngClient != null)
         {
-            mngClient.ajouter(transform.position);
+            mngClient.ajouter(enregistrement);
         }
-        clientParti = true;
+        
+        if (bulleCree != null) {
+            GetComponent<popUpTrigger>().hidePopup();
+            Destroy(bulleCree);
+        }
+
+        GameObject obj = Instantiate(pasContent,transform.position + new Vector3(0,2,0), Quaternion.identity);
+        obj.transform.parent = transform;
 
         GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(transform.position.x, 20));
         pointsScript.addPoint(-10);

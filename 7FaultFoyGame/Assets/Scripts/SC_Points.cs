@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class SC_Points : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float point;
+    private int point;
     public Text textPoint;
 
     void Start()
     {
-        point = 0.0f;
+        point = 0;
         textPoint.text = "Points : 0";
     }
 
@@ -26,7 +26,7 @@ public class SC_Points : MonoBehaviour
 
     public void addPoint(float value)
     {
-        point += value;
+        point += Mathf.RoundToInt(value);
         textPoint.text = "Points : " + point;
     }
 }

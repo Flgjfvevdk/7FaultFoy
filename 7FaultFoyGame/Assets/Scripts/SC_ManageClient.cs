@@ -51,11 +51,13 @@ public class SC_ManageClient : MonoBehaviour
         Vector2 pos = positionsFace[0];
         positionsFace.RemoveAt(0);
         GameObject clientInstantie = Instantiate(client, spawn.position, Quaternion.identity);
-        clientInstantie.GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(pos.x, 7));
-        clientInstantie.GetComponent<clientDeplacement>().positionsVect.Add(pos);
-        clientInstantie.GetComponent<clientDemande>().mngClient = this;
-        clientInstantie.GetComponent<clientDemande>().pointsScript = GetComponent<SC_Points>();
-
+        clientDeplacement scClientDeplacement = clientInstantie.GetComponent<clientDeplacement>();
+        scClientDeplacement.positionsVect.Add(new Vector2(pos.x, 7));
+        scClientDeplacement.positionsVect.Add(pos);
+        clientDemande scClientDemande = clientInstantie.GetComponent<clientDemande>();
+        scClientDemande.mngClient = this;
+        scClientDemande.pointsScript = GetComponent<SC_Points>();
+        scClientDemande.enregistrement = pos;
     }
 
     public void ajouter(Vector2 vect)

@@ -14,6 +14,7 @@ public class clientDeplacement : MonoBehaviour
     private Rigidbody2D rb;
 
     private const float minimalDistance = 0.2f;
+    
 
 
 

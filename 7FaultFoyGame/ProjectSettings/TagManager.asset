@@ -12,6 +12,9 @@ TagManager:
   - player
   - Commande
   - bulle
+  - four
+  - evier
+  - boiteCroissant
   layers:
   - Default
   - TransparentFX

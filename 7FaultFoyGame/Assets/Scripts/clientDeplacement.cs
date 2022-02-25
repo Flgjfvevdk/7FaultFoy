@@ -6,22 +6,31 @@ public class clientDeplacement : MonoBehaviour
 {
 
     public Stack<Vector2> positions = new Stack<Vector2>();
+    public List<Vector2> positionsVect;
 
     public float speed;
 
     private Transform tr;
     private Rigidbody2D rb;
 
-    private const float minimalDistance = 0.2f; 
+    private const float minimalDistance = 0.2f;
+
+
 
     // Start is called before the first frame update
     void Start()
     {   
         // pushing positions 
-        positions.Push(new Vector2(3f, 3f));
-        positions.Push(new Vector2(-3f, 3f));
-        positions.Push(new Vector2(3f, -3f));
-        positions.Push(new Vector2(-3f, -3f));
+        //foreach(Vector2 pos in positionsVect)
+        //{
+        //    positions.Push(pos);
+        //}
+        //positionsVect.Clear();
+
+        //positions.Push(new Vector2(3f, 3f));
+        //positions.Push(new Vector2(-3f, 3f));
+        //positions.Push(new Vector2(3f, -3f));
+        //positions.Push(new Vector2(-3f, -3f));
         //
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
@@ -31,14 +40,32 @@ public class clientDeplacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (positions.Count != 0) {
-            if (!Near(positions.Peek())) { 
-                MoveTowards(positions.Peek());
-            } else {
-                positions.Pop();
+        if(positionsVect.Count > 0)
+        {
+            //positions.Push(positionsVect[0]);
+            if (!Near(positionsVect[0]))
+            {
+                MoveTowards(positionsVect[0]);
+            }
+            else
+            {
+                positionsVect.RemoveAt(0);
                 rb.velocity = new Vector2(0, 0);
             }
         }
+
+        //if (positions.Count != 0) {
+        //    if (!Near(positions.Peek()))
+        //    {
+        //        MoveTowards(positions.Peek());
+        //    }
+        //    else
+        //    {
+        //        positions.Pop();
+        //        rb.velocity = new Vector2(0, 0);
+        //    }
+
+        //}
     }
 
 

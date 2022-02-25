@@ -8,6 +8,7 @@ public class SC_Points : MonoBehaviour
     // Start is called before the first frame update
     private float point;
     public Text textPoint;
+
     void Start()
     {
         point = 0.0f;

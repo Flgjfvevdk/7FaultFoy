@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7967901089094593871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.55, y: -1.7, z: 0}
-  m_LocalScale: {x: 0.4443, y: 0.7221, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,13 +72,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_SortingOrder: 12
+  m_Sprite: {fileID: 21300000, guid: 8632669cc43e6fd4fb97dd37cacfb453, type: 3}
   m_Color: {r: 0.97914743, g: 0.92982376, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.08, y: 0.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -94,21 +94,21 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.8, y: 0.8}
+    newSize: {x: 0.08, y: 0.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &7967901089094593872
 MonoBehaviour:
@@ -126,5 +126,14 @@ MonoBehaviour:
   isCafe: 0
   fillingSirop: 0
   isSirop: 0
-  onCafetiere: 0
   clearTasse: 0
+  cafeFillingSprite:
+  - {fileID: 21300000, guid: b403905034bcc344f8053317887bc4f2, type: 3}
+  - {fileID: 21300000, guid: 09e2c81516fb76042ba83fb4c8d5c9bf, type: 3}
+  - {fileID: 21300000, guid: 09cd993d9ffab964aa42c129e631da81, type: 3}
+  - {fileID: 21300000, guid: 1e56347607581004dbdab800945b3dfe, type: 3}
+  siropFillingSprite:
+  - {fileID: 21300000, guid: 019d23dbea1b2e5419489c6ad14f3b80, type: 3}
+  - {fileID: 21300000, guid: 9acfaf2eaae58374fa61f7006b71e9a1, type: 3}
+  - {fileID: 21300000, guid: 5063b2a6497f8444a8c164cb65dbb02c, type: 3}
+  - {fileID: 21300000, guid: 9a0454ac2bb56354ba4293a3f72a5606, type: 3}

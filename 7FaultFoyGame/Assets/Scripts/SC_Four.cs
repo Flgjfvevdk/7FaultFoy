@@ -18,6 +18,9 @@ public class SC_Four : MonoBehaviour
     public GameObject player;
     private Transform tr;
 
+    public GameObject ptExclamation;
+    public Transform posPtExcl;
+    private GameObject ptExclamationReel;
 
     void Start()
     {
@@ -37,19 +40,28 @@ public class SC_Four : MonoBehaviour
             if (timeInFour < timeToCook)
             {
                 scViennoiserie.cookingRate = timeInFour / timeToCook;
-                viennoiserie.GetComponent<SpriteRenderer>().color = Color.yellow;
+                //viennoiserie.GetComponent<SpriteRenderer>().color = Color.yellow;
             }
             else
             {
                 isViennoiserieReady = true;
                 scViennoiserie.cookingRate = 1f;
-                viennoiserie.GetComponent<SpriteRenderer>().color = Color.black;
+                //viennoiserie.GetComponent<SpriteRenderer>().color = Color.black;
             }
         }
         else
         {
             isFourReady = true;
             isViennoiserieReady = false;
+        }
+
+        if (isViennoiserieReady && ptExclamationReel == null)
+        {
+            ptExclamationReel = Instantiate(ptExclamation, posPtExcl.position, Quaternion.identity);
+        }
+        else if (!isViennoiserieReady && ptExclamationReel != null)
+        {
+            Destroy(ptExclamationReel);
         }
     }
 
@@ -60,6 +72,7 @@ public class SC_Four : MonoBehaviour
         timeInFour = scViennoiserie.cookingRate * timeToCook;
         isFourReady = false;
         viennoiserie.transform.position = transform.position;
+        viennoiserie.GetComponent<SpriteRenderer>().sortingOrder = 6;
     }
 
     // Verifie si la tasse est sur la machine

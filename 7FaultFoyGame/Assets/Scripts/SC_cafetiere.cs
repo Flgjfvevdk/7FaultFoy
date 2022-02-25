@@ -20,6 +20,10 @@ public class SC_cafetiere : MonoBehaviour
     public GameObject player;
     private Transform tr;
 
+    public Transform verPos;
+    public Transform posPtExcl;
+    public GameObject ptExcl;
+    private GameObject ptExclamationReel;
 
     void Start()
     {
@@ -44,13 +48,13 @@ public class SC_cafetiere : MonoBehaviour
                 if (timeOnMachine < timeToMakeCoffee)
                 {
                     scTasse.fillingRate = timeOnMachine / timeToMakeCoffee;
-                    tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
+                    //tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 else
                 {
                     isCoffeeReady = true;
                     scTasse.fillingRate = 1f;
-                    tasse.GetComponent<SpriteRenderer>().color = Color.green;
+                    //tasse.GetComponent<SpriteRenderer>().color = Color.green;
                 }
             }
         }
@@ -58,6 +62,16 @@ public class SC_cafetiere : MonoBehaviour
         {
             isMachineReady = true;
             isCoffeeReady = false;
+        }
+
+
+        if (isCoffeeReady && ptExclamationReel == null)
+        {
+            ptExclamationReel = Instantiate(ptExcl, posPtExcl.position, Quaternion.identity);
+        }
+        else if (!isCoffeeReady && ptExclamationReel != null)
+        {
+            Destroy(ptExclamationReel);
         }
     }
 
@@ -67,14 +81,15 @@ public class SC_cafetiere : MonoBehaviour
         scTasse = tasse.GetComponent<SC_Tasse>();
         timeOnMachine = scTasse.fillingRate * timeToMakeCoffee;
         isMachineReady = false;
-        tasseLifted.transform.position = transform.position;
+        tasseLifted.transform.position = verPos.position;
     }
 
     // Verifie si la tasse est sur la machine
     public bool tassePresent()
     {
         Vector2 posTasse = tasse.transform.position;
-        if (Mathf.Sqrt(Mathf.Pow(posTasse.x - transform.position.x, 2) + Mathf.Pow(posTasse.y - transform.position.y, 2)) < 0.1f)
+        Transform verrePosition = verPos;
+        if (Mathf.Sqrt(Mathf.Pow(posTasse.x - verrePosition.position.x, 2) + Mathf.Pow(posTasse.y - verrePosition.position.y, 2)) < 0.1f)
         {
             return true;
         }

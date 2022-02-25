@@ -16,6 +16,9 @@ public class SC_Tasse : MonoBehaviour
     // Aide Test
     public bool clearTasse;
 
+    public Sprite[] cafeFillingSprite;
+    public Sprite[] siropFillingSprite;
+
 
 
     // Start is called before the first frame update
@@ -34,5 +37,16 @@ public class SC_Tasse : MonoBehaviour
             fillingSirop = 0f;
             this.GetComponent<SpriteRenderer>().color = Color.white;
         }
+
+        float maxFilling = Mathf.Max(fillingSirop, fillingRate);
+        if (isCafe)
+        {
+            GetComponent<SpriteRenderer>().sprite = cafeFillingSprite[Mathf.RoundToInt(maxFilling * (cafeFillingSprite.Length - 1))];
+        } else if (isSirop)
+        {
+            GetComponent<SpriteRenderer>().sprite = siropFillingSprite[Mathf.RoundToInt(maxFilling * (siropFillingSprite.Length - 1))];
+        }
+        
+        
     }
 }

@@ -38,10 +38,10 @@ public class popUpTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerClose()) {
-            showPopup();
-        } else {
-            hidePopup();
-        }
+        //if (playerClose()) {
+        //    showPopup();
+        //} else {
+        //    hidePopup();
+        //}
     }
 }

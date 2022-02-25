@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FoyGame.unity
     guid: 71ca78bda24a4e54f9cfce6be1505e89
+  - enabled: 1
+    path: Assets/Scenes/Credit.unity
+    guid: 7d18503ae0646ab4a9525889708099d2
   m_configObjects: {}

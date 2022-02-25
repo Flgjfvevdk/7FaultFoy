@@ -10,6 +10,7 @@ public class SC_TextMenu : MonoBehaviour
     public bool isJouer;
     public bool isOption;
     public bool isCredits;
+    public bool isBack;
     public Slider slider;
 
 
@@ -42,7 +43,11 @@ public class SC_TextMenu : MonoBehaviour
             }
             else if (isCredits)
             {
-                //Charger la scène des credits
+                SceneManager.LoadScene("Credit");
+            }
+            else if (isBack)
+            {
+                SceneManager.LoadScene("Menu");
             }
         }
         else

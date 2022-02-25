@@ -15,6 +15,7 @@ TagManager:
   - four
   - evier
   - boiteCroissant
+  - textBoutton
   layers:
   - Default
   - TransparentFX

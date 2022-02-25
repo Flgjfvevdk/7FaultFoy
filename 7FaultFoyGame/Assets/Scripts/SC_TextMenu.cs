@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SC_TextMenu : MonoBehaviour
 {
@@ -8,16 +10,15 @@ public class SC_TextMenu : MonoBehaviour
     public bool isJouer;
     public bool isOption;
     public bool isCredits;
+    public Slider slider;
+
 
     public float timeOnText;
+    public bool inText;
 
     // Temps qu'il faut attendre sur le text avant le changement de scène
     public float timeBeforeChange;
 
-    //Savoir si le joueur est sur le text
-    private Collider2D[] col;
-
-    public GameObject player;
 
 
 
@@ -33,7 +34,7 @@ public class SC_TextMenu : MonoBehaviour
         {
             if (isJouer)
             {
-                //Charger la scène de jeu
+                SceneManager.LoadScene("FoyGame");
             }
             else if (isOption)
             {
@@ -46,25 +47,29 @@ public class SC_TextMenu : MonoBehaviour
         }
         else
         {
-            // TODO matcher la taille de la OverlapBox avec la taille du text, 
-            // regarder si le joueur est dedant (faire une barre de chargement corespondant à timeOnText) ajouter les changement de scène
-            //col = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
-            //Debug.Log(transform.position);
-            col = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 1f);
-            foreach (Collider2D elem in col)
+            if(inText)
             {
-                if (elem.gameObject.CompareTag("Player"))
-                {
-                    Debug.Log("I'am in");
-                    timeOnText += Time.deltaTime;
-                }
-                else
-                {
-                    //timeOnText = 0f;
-                }
+                timeOnText += Time.deltaTime;
+                slider.value = timeOnText / timeBeforeChange;
             }
+            else{
+                timeOnText = 0f;
+                slider.value = 0f;
+            }
+        }
+    }
 
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.CompareTag("Player"))
+        {
+            inText = true;
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.CompareTag("Player"))
+        {
+            inText = false;
         }
     }
 }

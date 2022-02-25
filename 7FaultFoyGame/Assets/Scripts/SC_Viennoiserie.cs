@@ -8,11 +8,12 @@ public class SC_Viennoiserie : MonoBehaviour
 
     public Sprite spriteChaud;
     private bool spriteChanged;
+    public bool isCook;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isCook = false;
     }
 
     // Update is called once per frame

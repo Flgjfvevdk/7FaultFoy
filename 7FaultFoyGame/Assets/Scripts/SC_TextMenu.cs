@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SC_TextMenu : MonoBehaviour
+{
+    // Savoir quel type de Text on a
+    public bool isJouer;
+    public bool isOption;
+    public bool isCredits;
+
+    private float timeOnText;
+
+    // Temps qu'il faut attendre sur le text avant le changement de scène
+    public float timeBeforeChange;
+
+    //Savoir si le joueur est sur le text
+    private Collider2D[] col;
+
+    
+    
+    void Start()
+    {
+        timeOnText = 0f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(timeOnText >= timeBeforeChange)
+        {
+            if (isJouer)
+            {
+                //Charger la scène de jeu
+            }
+            else if (isOption)
+            {
+                //Charger la scène des options
+            }
+            else if(isCredits)
+            {
+                //Charger la scène des credits
+            }
+        } 
+        else
+        {
+            // TODO matcher la taille de la OverlapBox avec la taille du text, 
+            // regarder si le joueur est dedant (faire une barre de chargement corespondant à timeOnText) ajouter les changement de scène
+            /*col = Physics2D.OverlapBox(transform.position, new Vector2(0.1f, 0.1f), 0f);
+            foreach (Collider2D elem in col)
+            {
+                
+            }*/
+            timeOnText += Time.deltaTime;
+        }
+    }
+}

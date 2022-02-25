@@ -112,7 +112,21 @@ public class Mouvement_Joueur : MonoBehaviour
                         clientDemande scClientDemande = elem.GetComponent<clientDemande>();
                         if (scClientDemande != null && scClientDemande.maDemande == objetTenueStr) 
                         {
-                            scClientDemande.demandeSatisfaite();
+                            if(objetTenueStr == "Croissant")
+                            {
+                                SC_Viennoiserie scVienoiserie = ObjectLifted.GetComponent<SC_Viennoiserie>();
+                                if(scVienoiserie != null &&  scVienoiserie.isCook)
+                                {
+                                    scClientDemande.demandeSatisfaite();
+                                }
+                                else
+                                {
+                                    scClientDemande.demandeRate();
+                                }
+                            }
+                            else{
+                                scClientDemande.demandeSatisfaite();
+                            }
                             Destroy(ObjectLifted);
                             IsLifting = false;
                             ObjectLifted = null;

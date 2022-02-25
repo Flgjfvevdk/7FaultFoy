@@ -45,6 +45,7 @@ public class SC_Four : MonoBehaviour
             else
             {
                 isViennoiserieReady = true;
+                viennoiserie.GetComponent<SC_Viennoiserie>().isCook = true; 
                 scViennoiserie.cookingRate = 1f;
                 //viennoiserie.GetComponent<SpriteRenderer>().color = Color.black;
             }

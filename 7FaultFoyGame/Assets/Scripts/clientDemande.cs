@@ -120,7 +120,7 @@ public class clientDemande : MonoBehaviour
         GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(transform.position.x, 20));
     }
 
-    private void demandeRate()
+    public void demandeRate()
     {
         clientParti = true;
         if (mngClient != null)

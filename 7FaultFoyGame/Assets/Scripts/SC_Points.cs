@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SC_Points : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int point;
+    public int point;
     public Text textPoint;
 
     void Start()

@@ -11,6 +11,7 @@ public class SC_TextMenu : MonoBehaviour
     public bool isOption;
     public bool isCredits;
     public bool isBack;
+    public bool isQuitter;
     public Slider slider;
 
 
@@ -40,6 +41,10 @@ public class SC_TextMenu : MonoBehaviour
             else if (isOption)
             {
                 //Charger la scène des options
+            }
+            else if (isQuitter)
+            {
+                Application.Quit();
             }
             else if (isCredits)
             {

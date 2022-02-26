@@ -92,7 +92,7 @@ public class Mouvement_Joueur : MonoBehaviour
                 if (elem.gameObject.CompareTag("client") && ObjectLifted != null)
                 {
                     string objetTenueStr = "";
-                    if(ObjectLifted.GetComponent<SC_Viennoiserie>() != null)
+                    if(ObjectLifted.GetComponent<SC_Viennoiserie>() != null && ObjectLifted.GetComponent<SC_Viennoiserie>().isCook)
                     {
                         objetTenueStr = "Croissant";
                     } else if (ObjectLifted.GetComponent<SC_Tasse>() != null)
@@ -142,7 +142,7 @@ public class Mouvement_Joueur : MonoBehaviour
                 //On regarde si il y a une machine proche qui peut intéragir avec l'objet porté
                 foreach (Collider2D elem in col)
                 {
-                    if (elem.gameObject.CompareTag("cafetiere"))
+                    if (elem.gameObject.CompareTag("cafetiere") && ObjectLifted.GetComponent<SC_Tasse>() != null)
                     {
                         SC_cafetiere scCafetiere = elem.GetComponent<SC_cafetiere>();
                         if (scCafetiere.isMachineReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
@@ -152,7 +152,7 @@ public class Mouvement_Joueur : MonoBehaviour
                             IsLifting = false;
                         }
                     }
-                    else if (elem.gameObject.CompareTag("distributeurSirop"))
+                    else if (elem.gameObject.CompareTag("distributeurSirop") && ObjectLifted.GetComponent<SC_Tasse>() != null)
                     {
                         SC_DistributeurSirop scDistriSirop = elem.GetComponent<SC_DistributeurSirop>();
                         if (scDistriSirop.isDistributeurReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
@@ -162,7 +162,7 @@ public class Mouvement_Joueur : MonoBehaviour
                             IsLifting = false;
                         }
                     }
-                    else if (elem.gameObject.CompareTag("four"))
+                    else if (elem.gameObject.CompareTag("four") && ObjectLifted.GetComponent<SC_Viennoiserie>() != null)
                     {
                         SC_Four scFour = elem.GetComponent<SC_Four>();
                         if (scFour.isFourReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")

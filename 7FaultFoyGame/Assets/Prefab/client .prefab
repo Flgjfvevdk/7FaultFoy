@@ -501,7 +501,7 @@ MonoBehaviour:
   positionsVect:
   - {x: -11.5, y: -2}
   - {x: -11.5, y: 7}
-  - {x: -6.2, y: 7}
+  - {x: -7, y: 7}
   speed: 4
 --- !u!114 &6175201298417588420
 MonoBehaviour:
@@ -526,6 +526,7 @@ MonoBehaviour:
   tempsMaxAttente: 20
   pointsScript: {fileID: 0}
   pasContent: {fileID: 3107742839222533030, guid: 52fb7b91ae3427c4c94ea6cfc25d901f, type: 3}
+  Content: {fileID: 3107742839222533030, guid: 862377ea8b6197c4ea75b0d061586842, type: 3}
 --- !u!114 &453312510130404737
 MonoBehaviour:
   m_ObjectHideFlags: 0

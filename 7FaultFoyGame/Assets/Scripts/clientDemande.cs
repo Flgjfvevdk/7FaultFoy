@@ -38,6 +38,7 @@ public class clientDemande : MonoBehaviour
     private bool clientParti;
     
     public GameObject pasContent;
+    public GameObject Content;
     [System.NonSerialized] public Vector2 enregistrement;
     
     void Start()
@@ -115,9 +116,11 @@ public class clientDemande : MonoBehaviour
             Destroy(bulleCree);
         }
 
-        pointsScript.addPoint(100.0f * tempsAttente/tempsMaxAttente);
+        GameObject obj = Instantiate(Content, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        obj.transform.parent = transform;
 
         GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(transform.position.x, 20));
+        pointsScript.addPoint(100.0f * tempsAttente/tempsMaxAttente);
     }
 
     public void demandeRate()

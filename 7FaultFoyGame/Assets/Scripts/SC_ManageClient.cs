@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SC_ManageClient : MonoBehaviour
 {
@@ -15,23 +16,30 @@ public class SC_ManageClient : MonoBehaviour
     public GameObject client;
     public Transform spawn;
 
+    public Text textTimer;
+
 
     // Start is called before the first frame update
     void Start()
     {
         tempsRestant = tempsTotalJeu;
         timeBtwNextClient = 0;
+        textTimer.text = "Temps restant : " + Mathf.RoundToInt(tempsRestant);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(tempsRestant < 0)
+        textTimer.text = "Temps restant : " + Mathf.RoundToInt(tempsRestant)/60 + "m"+(Mathf.RoundToInt(tempsRestant) - (Mathf.RoundToInt(tempsRestant) / 60) * 60);
+
+        if (tempsRestant < 0)
         {
+            SC_PointAfficherFinal.point = GetComponent<SC_Points>().point;
             SceneManager.LoadScene("Scene_Fin");
         } else
         {
             tempsRestant -= Time.deltaTime;
+
         }
 
         if(timeBtwNextClient <= 0)

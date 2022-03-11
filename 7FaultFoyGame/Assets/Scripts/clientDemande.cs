@@ -40,7 +40,7 @@ public class clientDemande : MonoBehaviour
     public GameObject pasContent;
     public GameObject Content;
     [System.NonSerialized] public Vector2 enregistrement;
-    
+
     void Start()
     {
         tempsAttente = tempsMaxAttente;
@@ -56,6 +56,11 @@ public class clientDemande : MonoBehaviour
         }
 
         demandeIndex = Random.Range(0,demandes.Length);
+        if(demandeIndex == demandes.Length)
+        {
+            //Pour réduire les chances de tomber sur croissant, on relance si on tombe dessus
+            demandeIndex = Random.Range(0, demandes.Length);
+        }
         maDemande = demandes[demandeIndex];
         sprRend.sprite = commandes[demandeIndex];
 
@@ -81,14 +86,6 @@ public class clientDemande : MonoBehaviour
             //GetComponent<popUpTrigger>().showPopup();
             bulleCree.GetComponent<SC_Bulle>().popup = GetComponent<popUpTrigger>();
         }
-        // else if (!InRange & isTalking) {
-        //     //Debug.Log("bulle destroyed client est loin");
-        //     isTalking = false;
-        //     if (bulleCree != null) {
-        //         GetComponent<popUpTrigger>().hidePopup();
-        //         Destroy(bulleCree);
-        //     }
-        // }
 
         if(tempsAttente <= 0)
         {
@@ -119,8 +116,17 @@ public class clientDemande : MonoBehaviour
         GameObject obj = Instantiate(Content, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         obj.transform.parent = transform;
 
-        GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(transform.position.x, 20));
-        pointsScript.addPoint(100.0f * tempsAttente/tempsMaxAttente);
+        GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, transform.position.y));
+        GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, 20));
+        if (mngClient.deuxJoueur && transform.position.x > 0)
+        {
+            pointsScript.addPointJ2(100.0f * tempsAttente / tempsMaxAttente);
+
+        }
+        else
+        {
+            pointsScript.addPoint(100.0f * tempsAttente / tempsMaxAttente);
+        }
     }
 
     public void demandeRate()
@@ -129,17 +135,41 @@ public class clientDemande : MonoBehaviour
         if (mngClient != null)
         {
             mngClient.ajouter(enregistrement);
+            if (mngClient.deuxJoueur)
+            {
+                Vector2? vect = mngClient.demanderPosition(transform.position);
+                if (vect.HasValue)
+                {
+                    GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, transform.position.y));
+                    GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, vect.Value.y));
+                    GetComponent<clientDeplacement>().positionsVect.Add(vect.Value);
+                    enregistrement = vect.Value;
+                    tempsAttente = tempsMaxAttente;
+                    clientParti = false;
+
+                }
+            }
+        }
+        if (GetComponent<clientDeplacement>().positionsVect.Count == 0)
+        {
+            GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, transform.position.y));
+            GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(0, 20));
+            if(bulleCree != null)
+            {
+                GetComponent<popUpTrigger>().hidePopup();
+                Destroy(bulleCree);
+            }
         }
         
-        if (bulleCree != null) {
-            GetComponent<popUpTrigger>().hidePopup();
-            Destroy(bulleCree);
-        }
 
         GameObject obj = Instantiate(pasContent,transform.position + new Vector3(0,2,0), Quaternion.identity);
         obj.transform.parent = transform;
 
-        GetComponent<clientDeplacement>().positionsVect.Add(new Vector2(transform.position.x, 20));
-        pointsScript.addPoint(-10);
+        if (mngClient.deuxJoueur && transform.position.x > 0) {
+            pointsScript.addPointJ2(-10);
+
+        } else {
+            pointsScript.addPoint(-10);
+        }
     }
 }

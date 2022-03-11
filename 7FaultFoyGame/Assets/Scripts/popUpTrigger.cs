@@ -13,9 +13,17 @@ public class popUpTrigger : MonoBehaviour
     
 
     public bool playerClose() {
-        if (Mathf.Sqrt((tr.position.x-transform.position.x)*(tr.position.x-transform.position.x) + (tr.position.y-transform.position.y)*(tr.position.y-transform.position.y) ) < distance ) {
-            return true;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, distance);
+        foreach(Collider2D c in colliders)
+        {
+            if (CompareTag("Player"))
+            {
+                return true;
+            }
         }
+        //if (Mathf.Sqrt((tr.position.x-transform.position.x)*(tr.position.x-transform.position.x) + (tr.position.y-transform.position.y)*(tr.position.y-transform.position.y) ) < distance ) {
+        //    return true;
+        //}
         return false;
     }
 
@@ -30,7 +38,7 @@ public class popUpTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");  
+        player = GameObject.FindWithTag("Player");
         tr = player.GetComponent<Transform>();
         scr = popup.GetComponent<Popup>();
     }

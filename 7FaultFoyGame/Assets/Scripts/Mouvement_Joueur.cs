@@ -23,6 +23,9 @@ public class Mouvement_Joueur : MonoBehaviour
     public Transform centrePlayer;
     private int[] dir;
 
+    public int numeroJoueur; // 0 = il n'y a pas de j2 // 1 = j1 // 2 = J2
+    private KeyCode keyAction;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -30,6 +33,18 @@ public class Mouvement_Joueur : MonoBehaviour
         IsLifting = false;
 
         dir = new int[2] { 0, -1 };
+
+        if(numeroJoueur == 1)
+        {
+            keyAction = KeyCode.R;
+        } else if (numeroJoueur == 2)
+        {
+            keyAction = KeyCode.I;
+        } else
+        {
+            keyAction = KeyCode.Space;
+        }
+
     }
 
     void Update()
@@ -41,16 +56,76 @@ public class Mouvement_Joueur : MonoBehaviour
 
 
         // Gives a value between -1 and 1
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        if(numeroJoueur == 1)
+        {
+            if (Input.GetKey(KeyCode.D)) {
+                horizontal = 1;
+            } else if (Input.GetKey(KeyCode.Q)) {
+                horizontal = -1;
+            } else{
+                horizontal = 0;
+            }
+            if (Input.GetKey(KeyCode.Z)) {
+                vertical = 1;
+            }
+            else if (Input.GetKey(KeyCode.S)) {
+                vertical = -1;
+            } else {
+                vertical = 0;
+            }
+        } else if(numeroJoueur == 2) {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = 1;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = -1;
+            }
+            else
+            {
+                horizontal = 0;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                vertical = 1;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                vertical = -1;
+            }
+            else
+            {
+                vertical = 0;
+            }
+        } else { 
+            horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+            vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space) & !IsLifting)
+        if (Input.GetKeyDown(keyAction) & !IsLifting)
         {
             col = Physics2D.OverlapCircleAll(new Vector2(centrePlayer.position.x, centrePlayer.position.y), 1.2f);
+
+
+            GameObject objectTarget = null;
+            float distanceObjTarget = Mathf.Infinity;
+
             foreach (Collider2D elem in col)
             {
-                if(elem.gameObject.CompareTag("evier") && !IsLifting)
+                GameObject elemGO = elem.gameObject;
+                if ((elemGO.CompareTag("evier") || elemGO.CompareTag("boiteCroissant") || elemGO.CompareTag("attrapable")) && (Vector2.Distance(transform.position, elem.transform.position) < distanceObjTarget))
                 {
+                    objectTarget = elem.gameObject;
+                    distanceObjTarget = Vector2.Distance(transform.position, elem.transform.position);
+                }
+
+            }
+            if (objectTarget != null)
+            {
+                if (objectTarget.CompareTag("evier"))
+                {
+
                     GameObject verreReel = Instantiate(verreGO, transform.position, Quaternion.identity);
                     ObjectLifted = verreReel;
                     tr = verreReel.GetComponent<Transform>();
@@ -59,7 +134,7 @@ public class Mouvement_Joueur : MonoBehaviour
                     IsLifting = true;
                 }
 
-                if (elem.gameObject.CompareTag("boiteCroissant") && !IsLifting)
+                if (objectTarget.CompareTag("boiteCroissant"))
                 {
                     GameObject croissantReel = Instantiate(croissantGO, transform.position, Quaternion.identity);
                     ObjectLifted = croissantReel;
@@ -69,10 +144,10 @@ public class Mouvement_Joueur : MonoBehaviour
                     IsLifting = true;
                 }
 
-                if (elem.gameObject.CompareTag("attrapable") && !IsLifting)
+                if (objectTarget.CompareTag("attrapable"))
                 {
-                    ObjectLifted = elem.gameObject;
-                    tr = elem.gameObject.GetComponent<Transform>();
+                    ObjectLifted = objectTarget;
+                    tr = objectTarget.GetComponent<Transform>();
                     tr.SetPositionAndRotation(transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                     tr.SetParent(transform, true);
                     ObjectLifted.GetComponent<SpriteRenderer>().sortingOrder = 10;
@@ -80,12 +155,14 @@ public class Mouvement_Joueur : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space) & IsLifting)
+        else if (Input.GetKeyDown(keyAction) & IsLifting)
         {
             //On recup tous les trucs à côté.
             col = Physics2D.OverlapCircleAll(new Vector2(centrePlayer.position.x, centrePlayer.position.y), 1f);
 
             bool donnePnj = false;
+            bool actionFaite = false;
+
             //On regarde s'il y a un pnj qui a demandé l'objet porté à proximité
             foreach (Collider2D elem in col)
             {
@@ -136,13 +213,14 @@ public class Mouvement_Joueur : MonoBehaviour
                     }
                 }
             }
-
+            
             if (!donnePnj)
             {
+                
                 //On regarde si il y a une machine proche qui peut intéragir avec l'objet porté
                 foreach (Collider2D elem in col)
                 {
-                    if (elem.gameObject.CompareTag("cafetiere") && ObjectLifted.GetComponent<SC_Tasse>() != null)
+                    if (!actionFaite && elem.gameObject.CompareTag("cafetiere") && ObjectLifted.GetComponent<SC_Tasse>() != null)
                     {
                         SC_cafetiere scCafetiere = elem.GetComponent<SC_cafetiere>();
                         if (scCafetiere.isMachineReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
@@ -150,9 +228,21 @@ public class Mouvement_Joueur : MonoBehaviour
                             scCafetiere.makeCoffee(ObjectLifted);
                             tr.parent = null;
                             IsLifting = false;
+                        } else if (scCafetiere.isCoffeeReady && scCafetiere.tassePresent())
+                        {
+                            GameObject nouveauTasse = scCafetiere.tasse;
+                            scCafetiere.makeCoffee(ObjectLifted);
+                            ObjectLifted.transform.parent = null;
+
+                            ObjectLifted = nouveauTasse;
+                            tr = ObjectLifted.GetComponent<Transform>();
+                            tr.SetPositionAndRotation(transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                            tr.SetParent(transform, true);
+                            ObjectLifted.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                            actionFaite = true;
                         }
                     }
-                    else if (elem.gameObject.CompareTag("distributeurSirop") && ObjectLifted.GetComponent<SC_Tasse>() != null)
+                    else if (!actionFaite && elem.gameObject.CompareTag("distributeurSirop") && ObjectLifted.GetComponent<SC_Tasse>() != null)
                     {
                         SC_DistributeurSirop scDistriSirop = elem.GetComponent<SC_DistributeurSirop>();
                         if (scDistriSirop.isDistributeurReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
@@ -161,8 +251,21 @@ public class Mouvement_Joueur : MonoBehaviour
                             tr.parent = null;
                             IsLifting = false;
                         }
+                        else if (scDistriSirop.isSiropReady && scDistriSirop.tassePresent()) 
+                        {
+                            GameObject nouveauVerre = scDistriSirop.tasse;
+                            scDistriSirop.makeSirop(ObjectLifted);
+                            ObjectLifted.transform.parent = null;
+
+                            ObjectLifted = nouveauVerre; 
+                            tr = ObjectLifted.GetComponent<Transform>();
+                            tr.SetPositionAndRotation(transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                            tr.SetParent(transform, true);
+                            ObjectLifted.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                            actionFaite = true;
+                        }
                     }
-                    else if (elem.gameObject.CompareTag("four") && ObjectLifted.GetComponent<SC_Viennoiserie>() != null)
+                    else if (!actionFaite && elem.gameObject.CompareTag("four") && ObjectLifted.GetComponent<SC_Viennoiserie>() != null)
                     {
                         SC_Four scFour = elem.GetComponent<SC_Four>();
                         if (scFour.isFourReady) // Il serait bien de vérifier que l'objet est bien une tasse && ObjectLifted.CompareTag("tasse")
@@ -170,6 +273,18 @@ public class Mouvement_Joueur : MonoBehaviour
                             scFour.cookViennoiserie(ObjectLifted);
                             tr.parent = null;
                             IsLifting = false;
+                        } else if (scFour.isViennoiserieReady && scFour.viennoiseriePresent())
+                        {
+                            GameObject nouveauCroissant = scFour.viennoiserie;
+                            scFour.cookViennoiserie(ObjectLifted);
+                            ObjectLifted.transform.parent = null;
+
+                            ObjectLifted = nouveauCroissant;
+                            tr = ObjectLifted.GetComponent<Transform>();
+                            tr.SetPositionAndRotation(transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                            tr.SetParent(transform, true);
+                            ObjectLifted.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                            actionFaite = true;
                         }
                     }
                 }
@@ -177,7 +292,7 @@ public class Mouvement_Joueur : MonoBehaviour
             }
 
             //On n'a pas trouver de cafetiere ou autre
-            if (IsLifting)
+            if (IsLifting && !actionFaite)
             {
                 tr = ObjectLifted.GetComponent<Transform>();
 

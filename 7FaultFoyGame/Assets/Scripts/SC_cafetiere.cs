@@ -11,7 +11,8 @@ public class SC_cafetiere : MonoBehaviour
     public float timeToMakeCoffee;
 
     // Tasse
-    private GameObject tasse;
+    [System.NonSerialized]
+    public GameObject tasse;
     private SC_Tasse scTasse;
     public float timeOnMachine;
     public bool isCoffeeReady;
@@ -48,6 +49,7 @@ public class SC_cafetiere : MonoBehaviour
                 if (timeOnMachine < timeToMakeCoffee)
                 {
                     scTasse.fillingRate = timeOnMachine / timeToMakeCoffee;
+                    isCoffeeReady = false;
                     //tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 else

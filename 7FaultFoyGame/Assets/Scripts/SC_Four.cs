@@ -9,7 +9,8 @@ public class SC_Four : MonoBehaviour
     public float timeToCook;
 
     // Viennoiserie
-    private GameObject viennoiserie;
+    [System.NonSerialized]
+    public GameObject viennoiserie;
     private SC_Viennoiserie scViennoiserie;
     public float timeInFour;
     public bool isViennoiserieReady;
@@ -40,6 +41,7 @@ public class SC_Four : MonoBehaviour
             if (timeInFour < timeToCook)
             {
                 scViennoiserie.cookingRate = timeInFour / timeToCook;
+                isViennoiserieReady = false;
                 //viennoiserie.GetComponent<SpriteRenderer>().color = Color.yellow;
             }
             else

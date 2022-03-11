@@ -21,18 +21,6 @@ public class clientDeplacement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        // pushing positions 
-        //foreach(Vector2 pos in positionsVect)
-        //{
-        //    positions.Push(pos);
-        //}
-        //positionsVect.Clear();
-
-        //positions.Push(new Vector2(3f, 3f));
-        //positions.Push(new Vector2(-3f, 3f));
-        //positions.Push(new Vector2(3f, -3f));
-        //positions.Push(new Vector2(-3f, -3f));
-        //
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
@@ -53,20 +41,11 @@ public class clientDeplacement : MonoBehaviour
                 positionsVect.RemoveAt(0);
                 rb.velocity = new Vector2(0, 0);
             }
+        } else
+        {
+            rb.velocity = new Vector2(0, 0);
         }
 
-        //if (positions.Count != 0) {
-        //    if (!Near(positions.Peek()))
-        //    {
-        //        MoveTowards(positions.Peek());
-        //    }
-        //    else
-        //    {
-        //        positions.Pop();
-        //        rb.velocity = new Vector2(0, 0);
-        //    }
-
-        //}
     }
 
 
@@ -97,5 +76,16 @@ public class clientDeplacement : MonoBehaviour
             return true;
         }
         return false;
-    } 
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        float rdAngle = Random.Range(0, 2 * Mathf.PI);
+        rb.velocity = new Vector2(Mathf.Cos(rdAngle), Mathf.Sin(rdAngle));
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float rdAngle = Random.Range(0, 2 * Mathf.PI);
+        rb.velocity = new Vector2(Mathf.Cos(rdAngle), Mathf.Sin(rdAngle));
+    }
 }

@@ -9,7 +9,8 @@ public class SC_DistributeurSirop : MonoBehaviour
     public float timeToMakeSirop;
 
     // Tasse
-    private GameObject tasse;
+    [System.NonSerialized]
+    public GameObject tasse;
     private SC_Tasse scTasse;
     public float timeOnMachine;
     public bool isSiropReady;
@@ -43,6 +44,7 @@ public class SC_DistributeurSirop : MonoBehaviour
                 if (timeOnMachine < timeToMakeSirop)
                 {
                     scTasse.fillingSirop = timeOnMachine / timeToMakeSirop;
+                    isSiropReady = false;
                     //tasse.GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 else

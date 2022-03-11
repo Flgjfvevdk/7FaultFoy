@@ -57,7 +57,7 @@ public class SC_ClientApparence : MonoBehaviour
                 orientationIndex = 3;
             } else
             {
-                orientationIndex = 0;
+                //orientationIndex = 0;
             }
         }
 

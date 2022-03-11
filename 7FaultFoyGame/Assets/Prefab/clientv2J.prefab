@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5706478422354438141}
   - component: {fileID: 3065353495268178834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Perso_Chaussure1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 809205893067825190}
   - component: {fileID: 1907301754364819818}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Perso_Cheveux1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 7648711158533222290}
   - component: {fileID: 2622986603801431437}
   - component: {fileID: 369730660589895642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Perso_corpsB1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,8 +346,9 @@ GameObject:
   - component: {fileID: 1567132818409261222}
   - component: {fileID: 6175201298417588420}
   - component: {fileID: 453312510130404737}
-  m_Layer: 0
-  m_Name: 'client '
+  - component: {fileID: 4508953398148765739}
+  m_Layer: 7
+  m_Name: clientv2J
   m_TagString: client
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,10 +437,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b8e91cf8480a5c6449009a5edab8ee79, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1567132818409261220
 BoxCollider2D:
@@ -454,7 +455,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.8}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -465,7 +466,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.84, y: 3.6}
+  m_Size: {x: 4.4, y: 1.4}
   m_EdgeRadius: 0
 --- !u!95 &1567132818409261218
 Animator:
@@ -498,10 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5577e3e0fa7224492740a0ae01e633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionsVect:
-  - {x: -11.5, y: -2}
-  - {x: -11.5, y: 7}
-  - {x: -7, y: 7}
+  positionsVect: []
   speed: 4
 --- !u!114 &6175201298417588420
 MonoBehaviour:
@@ -520,7 +518,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9a0454ac2bb56354ba4293a3f72a5606, type: 3}
   - {fileID: 21300000, guid: a2ce9240e16541341a6c7b7b106b4624, type: 3}
   - {fileID: 21300000, guid: 0fe7eb414f8c7894388d7bc2cc5c4117, type: 3}
-  distanceJoueur: 2
+  distanceJoueur: 3
   bulle: {fileID: 400432846640527705, guid: 6d4a802b8c7217844a03801f8102baf0, type: 3}
   maDemande: 
   tempsMaxAttente: 20
@@ -541,6 +539,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popup: {fileID: 5329086423903165321}
   distance: 2
+--- !u!58 &4508953398148765739
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567132818409261221}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.6}
+  serializedVersion: 2
+  m_Radius: 0.67
 --- !u!1 &4482119233045975263
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9218475964987036164}
   - component: {fileID: 5506273289158928152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Perso_vet1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +648,7 @@ GameObject:
   - component: {fileID: 8201955435567342806}
   - component: {fileID: 6627054716107257104}
   - component: {fileID: 205689152}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Commande
   m_TagString: Commande
   m_Icon: {fileID: 0}

@@ -40,8 +40,16 @@ public class SC_ManageClient : MonoBehaviour
 
         if (tempsRestant < 0)
         {
-            SC_PointAfficherFinal.point = GetComponent<SC_Points>().point;
-            SceneManager.LoadScene("Scene_Fin");
+            if(deuxJoueur){
+                SC_PointAfficherFinal2J.point1 = GetComponent<SC_Points>().point;
+                SC_PointAfficherFinal2J.point2 = GetComponent<SC_Points>().pointJ2;
+                SceneManager.LoadScene("Scene_Fin 2J");
+            } else {
+                SC_PointAfficherFinal.point = GetComponent<SC_Points>().point;
+            
+                SceneManager.LoadScene("Scene_Fin");
+            }
+            
         } else
         {
             tempsRestant -= Time.deltaTime;
@@ -100,7 +108,7 @@ public class SC_ManageClient : MonoBehaviour
             scClientDemande.enregistrement = new Vector2(-Mathf.Abs(pos.x), pos.y);
         }
 
-        //On fait spawn le deuxième client
+        //On fait spawn le deuxiï¿½me client
         if(positionsFace2.Count > 0)
         {
             int rd = Random.Range(0, positionsFace2.Count);
@@ -139,7 +147,7 @@ public class SC_ManageClient : MonoBehaviour
         Vector2? vect = null;
         if(ancienPos.x < 0)
         {
-            //Le client était à droite, on va voir si on peut le faire aller à gauche
+            //Le client ï¿½tait ï¿½ droite, on va voir si on peut le faire aller ï¿½ gauche
             if(positionsFace2.Count > 0)
             {
                 int rd = Random.Range(0, positionsFace2.Count);
@@ -149,7 +157,7 @@ public class SC_ManageClient : MonoBehaviour
             }
         } else
         {
-            //Le client était à gauche, on va voir si on peut le faire aller à droite
+            //Le client ï¿½tait ï¿½ gauche, on va voir si on peut le faire aller ï¿½ droite
             if (positionsFace.Count > 0)
             {
                 int rd = Random.Range(0, positionsFace.Count);

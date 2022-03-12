@@ -11,6 +11,7 @@ public class SC_Points : MonoBehaviour
     public Text textPoint;
     public Text textPointJ2;
 
+
     void Start()
     {
         point = 0;

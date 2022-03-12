@@ -8,6 +8,7 @@ public class SC_TextMenu : MonoBehaviour
 {
     // Savoir quel type de Text on a
     public bool isJouer;
+    public bool is2J;
     public bool isOption;
     public bool isCredits;
     public bool isBack;
@@ -38,9 +39,9 @@ public class SC_TextMenu : MonoBehaviour
             {
                 SceneManager.LoadScene("FoyGame");
             }
-            else if (isOption)
+            else if (is2J)
             {
-                //Charger la scène des options
+                SceneManager.LoadScene("FoyGame2J");
             }
             else if (isQuitter)
             {

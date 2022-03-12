@@ -103,7 +103,7 @@ public class Mouvement_Joueur : MonoBehaviour
             vertical = Input.GetAxisRaw("Vertical"); // -1 is down
         }
 
-        if (Input.GetKeyDown(keyAction) & !IsLifting)
+        if ((Input.GetKeyDown(keyAction) || Input.GetKeyDown(KeyCode.Space)) & !IsLifting)
         {
             col = Physics2D.OverlapCircleAll(new Vector2(centrePlayer.position.x, centrePlayer.position.y), 1.2f);
 
@@ -155,7 +155,7 @@ public class Mouvement_Joueur : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(keyAction) & IsLifting)
+        else if ((Input.GetKeyDown(keyAction)||Input.GetKeyDown(KeyCode.Space)) && IsLifting)
         {
             //On recup tous les trucs à côté.
             col = Physics2D.OverlapCircleAll(new Vector2(centrePlayer.position.x, centrePlayer.position.y), 1f);

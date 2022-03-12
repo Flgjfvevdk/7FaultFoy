@@ -962,6 +962,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 231851254437546674, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
+      propertyPath: numeroJoueur
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 231851254437546676, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1153,7 +1157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 0
+  pointJ2: 0
   textPoint: {fileID: 1840940429}
+  textPointJ2: {fileID: 0}
 --- !u!114 &877802212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,8 +1182,11 @@ MonoBehaviour:
   - {x: 1.8, y: 4.1}
   - {x: 4, y: 4.1}
   client: {fileID: 1567132818409261221, guid: dcba30674c09f6c4b8f44e39b145f456, type: 3}
+  client2J: {fileID: 0}
   spawn: {fileID: 1230688816}
+  spawn2: {fileID: 0}
   textTimer: {fileID: 226711331}
+  deuxJoueur: 0
 --- !u!1 &1122848861
 GameObject:
   m_ObjectHideFlags: 0

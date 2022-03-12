@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class restart : MonoBehaviour
 {
+    public bool deuxJoueur;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +15,13 @@ public class restart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.R)) {
-            SceneManager.LoadScene("FoyGame");
+        if (Input.GetKey(KeyCode.T)) {
+            if(deuxJoueur){
+                SceneManager.LoadScene("FoyGame2J");
+            } else {
+                SceneManager.LoadScene("FoyGame");
+            }
+            
         }
     }
 }

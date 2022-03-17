@@ -23,6 +23,8 @@ public class SC_ManageClient : MonoBehaviour
 
     public bool deuxJoueur;
 
+    public GameObject boutonsPause;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,44 +38,70 @@ public class SC_ManageClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textTimer.text = "Temps restant : " + Mathf.RoundToInt(tempsRestant)/60 + "m"+(Mathf.RoundToInt(tempsRestant) - (Mathf.RoundToInt(tempsRestant) / 60) * 60);
+        textTimer.text = "Temps restant : " + Mathf.RoundToInt(tempsRestant) / 60 + "m" + (Mathf.RoundToInt(tempsRestant) - (Mathf.RoundToInt(tempsRestant) / 60) * 60);
 
         if (tempsRestant < 0)
         {
-            if(deuxJoueur){
+            if (deuxJoueur)
+            {
                 SC_PointAfficherFinal2J.point1 = GetComponent<SC_Points>().point;
                 SC_PointAfficherFinal2J.point2 = GetComponent<SC_Points>().pointJ2;
                 SceneManager.LoadScene("Scene_Fin 2J");
-            } else {
+            }
+            else
+            {
                 SC_PointAfficherFinal.point = GetComponent<SC_Points>().point;
-            
+
                 SceneManager.LoadScene("Scene_Fin");
             }
-            
-        } else
+
+        }
+        else
         {
             tempsRestant -= Time.deltaTime;
 
         }
 
-        if(timeBtwNextClient <= 0)
+        if (timeBtwNextClient <= 0)
         {
             if (!deuxJoueur)
             {
-                if(positionsFace.Count > 0)
+                if (positionsFace.Count > 0)
                 {
                     spawnClient();
                     timeBtwNextClient = timeBtwClient;
                 }
-            } else
+            }
+            else
             {
                 spawn2Client();
                 timeBtwNextClient = timeBtwClient;
             }
-        } else
+        }
+        else
         {
             timeBtwNextClient -= Time.deltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pauseMenu();
+        }
+        
+    }
+
+    public void pauseMenu()
+    {
+        if(Time.timeScale > 0)
+        {
+            Time.timeScale = 0;
+            boutonsPause.SetActive(true);
+        } else
+        {
+            Time.timeScale = 1;
+            boutonsPause.SetActive(false);
+        }
+            
     }
 
     private void spawnClient()

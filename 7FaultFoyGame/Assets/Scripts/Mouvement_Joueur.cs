@@ -34,15 +34,15 @@ public class Mouvement_Joueur : MonoBehaviour
 
         dir = new int[2] { 0, -1 };
 
-        if(numeroJoueur == 2)
+        if(numeroJoueur == 1)
         {
             keyAction = KeyCode.R;
-        } else if (numeroJoueur == 1)
+        } else if (numeroJoueur == 2)
         {
             keyAction = KeyCode.I;
         } else
         {
-            keyAction = KeyCode.I;
+            keyAction = KeyCode.R;
         }
 
     }
@@ -56,7 +56,7 @@ public class Mouvement_Joueur : MonoBehaviour
 
 
         // Gives a value between -1 and 1
-        if(numeroJoueur == 2)
+        if(numeroJoueur == 1)
         {
             if (Input.GetKey(KeyCode.D)) {
                 horizontal = 1;
@@ -73,7 +73,7 @@ public class Mouvement_Joueur : MonoBehaviour
             } else {
                 vertical = 0;
             }
-        } else if(numeroJoueur == 1) {
+        } else if(numeroJoueur == 2) {
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 horizontal = 1;

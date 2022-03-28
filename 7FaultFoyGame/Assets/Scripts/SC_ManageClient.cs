@@ -83,7 +83,7 @@ public class SC_ManageClient : MonoBehaviour
             timeBtwNextClient -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             pauseMenu();
         }

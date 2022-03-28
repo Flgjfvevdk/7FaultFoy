@@ -13,6 +13,8 @@ public class SC_TextMenu : MonoBehaviour
     public bool isCredits;
     public bool isBack;
     public bool isQuitter;
+    public bool isTuto01;
+    public bool isTuto02;
     public Slider slider;
 
 
@@ -54,6 +56,14 @@ public class SC_TextMenu : MonoBehaviour
             else if (isBack)
             {
                 SceneManager.LoadScene("Menu");
+            }
+            else if (isTuto01)
+            {
+                SceneManager.LoadScene("Tuto01");
+            }
+            else if (isTuto02)
+            {
+                SceneManager.LoadScene("Tuto02");
             }
         }
         else

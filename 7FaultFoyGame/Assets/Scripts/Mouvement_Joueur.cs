@@ -34,15 +34,15 @@ public class Mouvement_Joueur : MonoBehaviour
 
         dir = new int[2] { 0, -1 };
 
-        if(numeroJoueur == 1)
+        if(numeroJoueur == 2)
         {
             keyAction = KeyCode.R;
-        } else if (numeroJoueur == 2)
+        } else if (numeroJoueur == 1)
         {
             keyAction = KeyCode.I;
         } else
         {
-            keyAction = KeyCode.Space;
+            keyAction = KeyCode.I;
         }
 
     }
@@ -56,7 +56,7 @@ public class Mouvement_Joueur : MonoBehaviour
 
 
         // Gives a value between -1 and 1
-        if(numeroJoueur == 1)
+        if(numeroJoueur == 2)
         {
             if (Input.GetKey(KeyCode.D)) {
                 horizontal = 1;
@@ -73,7 +73,7 @@ public class Mouvement_Joueur : MonoBehaviour
             } else {
                 vertical = 0;
             }
-        } else if(numeroJoueur == 2) {
+        } else if(numeroJoueur == 1) {
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 horizontal = 1;
@@ -101,6 +101,24 @@ public class Mouvement_Joueur : MonoBehaviour
         } else { 
             horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
             vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
+            //Si l'un des autres input est activé, on active aussi
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = 1;
+            }
+            else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = -1;
+            }
+            if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
+            {
+                vertical = 1;
+            }
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                vertical = -1;
+            }
         }
 
         if ((Input.GetKeyDown(keyAction) || Input.GetKeyDown(KeyCode.Space)) & !IsLifting)

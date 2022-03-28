@@ -1944,7 +1944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231851254437546674, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
       propertyPath: numeroJoueur
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 231851254437546676, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
       propertyPath: m_Name
@@ -3243,7 +3243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231851254437546674, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
       propertyPath: numeroJoueur
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 231851254437546676, guid: 2d8fa9c8baa8f204796c57b7e354d87d, type: 3}
       propertyPath: m_Name
